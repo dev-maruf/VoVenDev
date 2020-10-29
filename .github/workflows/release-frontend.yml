@@ -1,0 +1,22 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ dev-frontend-mrf ]
+    
+defaults:
+  run:
+    working-directory: ./Software/RaspberryPi/frontend
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.1.0
+    - name: Use Node.js 
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.15.x'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: ls -al
